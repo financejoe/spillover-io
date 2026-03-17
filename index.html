@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SpillOver.io — Regional Economic Impact Analysis Platform</title>
+  <meta name="description" content="Run professional economic impact analyses for any U.S. county or metro area. 71-industry Leontief input-output model with Monte Carlo confidence intervals. Free to explore, reports from $149.">
+  <meta name="keywords" content="economic impact analysis, input-output model, Leontief model, regional economics, multiplier analysis, IMPLAN alternative, economic development, BEA data, fiscal impact, job creation analysis">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="SpillOver.io — Regional Economic Impact Analysis">
+  <meta property="og:description" content="Professional economic impact reports for any U.S. region. 71-industry I-O model with Monte Carlo uncertainty analysis.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://spillover.io">
+  <meta property="og:image" content="https://spillover.io/og-image.png">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SpillOver.io — Regional Economic Impact Analysis">
+  <meta name="twitter:description" content="Professional economic impact reports for any U.S. region. Free to explore.">
+  
+  <!-- Canonical -->
+  <link rel="canonical" href="https://spillover.io">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "SpillOver.io",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "description": "Regional economic impact analysis platform using Leontief input-output modeling with BEA data for any U.S. county or metropolitan area.",
+    "url": "https://spillover.io",
+    "offers": {
+      "@type": "Offer",
+      "price": "149",
+      "priceCurrency": "USD",
+      "description": "Full platform access — Word, PDF, and CSV report downloads"
+    },
+    "featureList": [
+      "71-industry Leontief input-output model",
+      "Any U.S. county or metropolitan area",
+      "Monte Carlo uncertainty analysis",
+      "Professional Word and PDF reports",
+      "Flegg Location Quotient regionalization",
+      "Social Accounting Matrix for induced effects",
+      "Bureau of Economic Analysis 2024 data"
+    ]
+  }
+  </script>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy: #1B3A5C;
+      --blue: #2E75B6;
+      --light-blue: #E8F0F8;
+      --green: #16a34a;
+      --dark-green: #15803d;
+      --slate: #475569;
+      --light-slate: #94a3b8;
+      --off-white: #f8fafc;
+      --warm-white: #fefefe;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      color: #1a1a2e;
+      background: var(--warm-white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      padding: 16px 0;
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 24px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo svg { height: 28px; width: auto; }
+    .nav-logo-text {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 22px; font-weight: 700; color: var(--navy);
+    }
+    .nav-logo-text span { color: var(--blue); font-weight: 400; }
+    .nav-cta {
+      background: var(--navy); color: white; padding: 10px 24px;
+      border-radius: 8px; text-decoration: none; font-weight: 600;
+      font-size: 14px; transition: all 0.2s;
+    }
+    .nav-cta:hover { background: var(--blue); transform: translateY(-1px); }
+
+    /* ─── HERO ────────────────────────────────────── */
+    .hero {
+      padding: 160px 24px 100px;
+      text-align: center;
+      background: linear-gradient(175deg, var(--off-white) 0%, white 40%, var(--light-blue) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 20% 50%, rgba(46,117,182,0.08) 0%, transparent 60%),
+                  radial-gradient(ellipse at 80% 30%, rgba(27,58,92,0.06) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(36px, 5.5vw, 64px);
+      color: var(--navy);
+      line-height: 1.1;
+      max-width: 800px;
+      margin: 0 auto 24px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--blue), var(--navy));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      font-size: clamp(17px, 2vw, 20px);
+      color: var(--slate);
+      max-width: 620px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+      font-weight: 300;
+    }
+    .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--green), var(--dark-green));
+      color: white; padding: 16px 36px; border-radius: 10px;
+      text-decoration: none; font-weight: 600; font-size: 16px;
+      transition: all 0.25s; box-shadow: 0 4px 16px rgba(22,163,74,0.25);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(22,163,74,0.35); }
+    .btn-secondary {
+      background: white; color: var(--navy); padding: 16px 36px; border-radius: 10px;
+      text-decoration: none; font-weight: 600; font-size: 16px;
+      border: 2px solid var(--navy); transition: all 0.25s;
+    }
+    .btn-secondary:hover { background: var(--navy); color: white; }
+
+    .hero-badge {
+      display: inline-block; background: var(--light-blue); color: var(--navy);
+      padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600;
+      margin-bottom: 24px; letter-spacing: 0.5px;
+    }
+
+    /* ─── SECTIONS ────────────────────────────────── */
+    section { padding: 100px 24px; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 13px; font-weight: 700; color: var(--blue);
+      letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(28px, 4vw, 44px);
+      color: var(--navy); margin-bottom: 20px; line-height: 1.2;
+    }
+    .section-subtitle {
+      font-size: 18px; color: var(--slate); max-width: 600px;
+      line-height: 1.6; font-weight: 300; margin-bottom: 48px;
+    }
+
+    /* ─── FEATURES ────────────────────────────────── */
+    .features-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+    }
+    .feature-card {
+      background: white; border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 16px; padding: 36px;
+      transition: all 0.3s;
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(27,58,92,0.1);
+      border-color: var(--blue);
+    }
+    .feature-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: var(--light-blue); display: flex; align-items: center;
+      justify-content: center; margin-bottom: 20px; font-size: 22px;
+    }
+    .feature-card h3 {
+      font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 10px;
+    }
+    .feature-card p {
+      font-size: 15px; color: var(--slate); line-height: 1.6; font-weight: 300;
+    }
+
+    /* ─── HOW IT WORKS ────────────────────────────── */
+    .how-it-works { background: var(--off-white); }
+    .steps {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 40px; counter-reset: step;
+    }
+    .step { text-align: center; }
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      display: inline-flex; width: 56px; height: 56px; border-radius: 50%;
+      background: var(--navy); color: white; font-size: 22px; font-weight: 700;
+      align-items: center; justify-content: center; margin-bottom: 20px;
+    }
+    .step h3 { font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .step p { font-size: 14px; color: var(--slate); line-height: 1.6; font-weight: 300; }
+
+    /* ─── METHODOLOGY ─────────────────────────────── */
+    .method-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+    }
+    .method-text h3 { font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 12px; }
+    .method-text p { font-size: 15px; color: var(--slate); line-height: 1.7; margin-bottom: 16px; font-weight: 300; }
+    .method-stats {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    }
+    .stat-box {
+      background: var(--light-blue); border-radius: 12px; padding: 24px; text-align: center;
+    }
+    .stat-box .number {
+      font-family: 'DM Serif Display', serif;
+      font-size: 36px; color: var(--navy); line-height: 1;
+    }
+    .stat-box .label { font-size: 13px; color: var(--slate); margin-top: 6px; font-weight: 500; }
+
+    /* ─── USE CASES ───────────────────────────────── */
+    .use-cases { background: var(--off-white); }
+    .use-case-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px;
+    }
+    .use-case {
+      background: white; border-radius: 12px; padding: 28px;
+      border-left: 4px solid var(--blue);
+    }
+    .use-case h3 { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .use-case p { font-size: 14px; color: var(--slate); line-height: 1.6; font-weight: 300; }
+
+    /* ─── COMPARISON ──────────────────────────────── */
+    .comparison-table {
+      width: 100%; border-collapse: collapse; margin-top: 40px;
+      background: white; border-radius: 16px; overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+    .comparison-table th {
+      background: var(--navy); color: white; padding: 16px 20px;
+      text-align: left; font-weight: 600; font-size: 14px;
+    }
+    .comparison-table td {
+      padding: 14px 20px; border-bottom: 1px solid #f1f5f9;
+      font-size: 14px; color: var(--slate);
+    }
+    .comparison-table tr:last-child td { border-bottom: none; }
+    .comparison-table .highlight { background: rgba(46,117,182,0.04); }
+    .check { color: var(--green); font-weight: 700; }
+    .cross { color: #dc2626; }
+
+    /* ─── PRICING ─────────────────────────────────── */
+    .pricing { text-align: center; }
+    .price-card {
+      max-width: 500px; margin: 0 auto; background: white;
+      border: 2px solid var(--blue); border-radius: 20px;
+      padding: 48px; box-shadow: 0 8px 40px rgba(27,58,92,0.1);
+    }
+    .price-amount {
+      font-family: 'DM Serif Display', serif;
+      font-size: 56px; color: var(--navy); margin: 16px 0;
+    }
+    .price-card ul {
+      list-style: none; text-align: left; margin: 24px 0;
+    }
+    .price-card li {
+      padding: 10px 0; font-size: 15px; color: var(--slate);
+      border-bottom: 1px solid #f1f5f9; font-weight: 300;
+    }
+    .price-card li::before {
+      content: '✓'; color: var(--green); font-weight: 700; margin-right: 12px;
+    }
+
+    /* ─── FAQ ─────────────────────────────────────── */
+    .faq { background: var(--off-white); }
+    .faq-item {
+      background: white; border-radius: 12px; padding: 24px 28px;
+      margin-bottom: 12px; border: 1px solid rgba(0,0,0,0.06);
+    }
+    .faq-item h3 {
+      font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px;
+    }
+    .faq-item p {
+      font-size: 14px; color: var(--slate); line-height: 1.7; font-weight: 300;
+    }
+
+    /* ─── FOOTER ──────────────────────────────────── */
+    footer {
+      background: var(--navy); color: rgba(255,255,255,0.7);
+      padding: 60px 24px; text-align: center;
+    }
+    footer .logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 28px; color: white; margin-bottom: 12px;
+    }
+    footer .logo span { color: var(--blue); }
+    footer p { font-size: 14px; line-height: 1.8; }
+    footer a { color: var(--blue); text-decoration: none; }
+    footer a:hover { color: white; }
+    .footer-links { margin: 20px 0; }
+    .footer-links a { margin: 0 16px; }
+
+    /* ─── RESPONSIVE ──────────────────────────────── */
+    @media (max-width: 768px) {
+      .method-grid { grid-template-columns: 1fr; }
+      .hero { padding: 130px 24px 80px; }
+      .comparison-table { font-size: 12px; }
+      .comparison-table th, .comparison-table td { padding: 10px 12px; }
+      nav { padding: 12px 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <svg viewBox="0 0 32 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polyline points="0,28 8,18 16,22 28,8" stroke="#1B3A5C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <polyline points="20,8 28,8 28,16" stroke="#1B3A5C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="0" y1="32" x2="28" y2="32" stroke="#1B3A5C" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <div class="nav-logo-text">SpillOver<span>.io</span></div>
+      </a>
+      <a href="https://spillover.shinyapps.io/econ_impact_app/" class="nav-cta">Launch Platform →</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">Free to explore · No account required</div>
+    <h1>Economic Impact Analysis for <em>Any U.S. Region</em></h1>
+    <p>Professional-grade input-output modeling powered by Bureau of Economic Analysis data. Build your analysis in minutes, not months.</p>
+    <div class="hero-buttons">
+      <a href="https://spillover.shinyapps.io/econ_impact_app/" class="btn-primary">Launch Free Analysis →</a>
+      <a href="#how-it-works" class="btn-secondary">See How It Works</a>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="container">
+      <div class="section-label">Capabilities</div>
+      <h2 class="section-title">Everything You Need for Rigorous Impact Analysis</h2>
+      <p class="section-subtitle">Built on peer-reviewed methodology with transparent, reproducible results.</p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>71-Industry I-O Model</h3>
+          <p>Full Leontief input-output model constructed from the BEA 2024 Use table at the summary level. Captures direct, indirect, and induced effects across all industry sectors.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🗺️</div>
+          <h3>Any U.S. County or Metro Area</h3>
+          <p>Select individual counties, multi-county regions, or pre-defined metropolitan statistical areas. Over 3,000 counties and 80+ MSAs available.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h3>Flegg LQ Regionalization</h3>
+          <p>National model regionalized using the Flegg Location Quotient method with BLS QCEW county-level employment data (2024 annual averages).</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📈</div>
+          <h3>Monte Carlo Confidence Intervals</h3>
+          <p>Uncertainty quantification via Monte Carlo simulation — vary key parameters simultaneously to produce 90% confidence intervals on all estimates.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📄</div>
+          <h3>Client-Ready Reports</h3>
+          <p>Professional Word and PDF documents with executive summary, methodology, county maps, industry tables, and tax revenue estimates. Ready for board presentations.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔬</div>
+          <h3>Validated Against BEA</h3>
+          <p>National model validated against BEA's published Total Requirements table, achieving 0.970 Pearson correlation across all matrix elements.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="container">
+      <div class="section-label">Process</div>
+      <h2 class="section-title">Analysis in Four Steps</h2>
+      <p class="section-subtitle">From region selection to downloadable report in under 10 minutes.</p>
+
+      <div class="steps">
+        <div class="step">
+          <h3>Select Your Region</h3>
+          <p>Choose a metropolitan area or build a custom multi-county region from any U.S. state.</p>
+        </div>
+        <div class="step">
+          <h3>Define Your Scenario</h3>
+          <p>Use built-in templates (hospital expansion, manufacturing, WFH impact) or enter custom industry shocks.</p>
+        </div>
+        <div class="step">
+          <h3>Run the Analysis</h3>
+          <p>The model computes multipliers, jobs, value added, labor income, and tax revenue in seconds.</p>
+        </div>
+        <div class="step">
+          <h3>Download Your Report</h3>
+          <p>Export professional Word, PDF, or CSV reports with full methodology and Monte Carlo results.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- METHODOLOGY -->
+  <section class="methodology">
+    <div class="container">
+      <div class="section-label">Methodology</div>
+      <h2 class="section-title">Rigorous, Transparent, Reproducible</h2>
+
+      <div class="method-grid">
+        <div class="method-text">
+          <h3>Leontief Input-Output Framework</h3>
+          <p>The model constructs the direct requirements matrix from BEA's 2024 Use table and computes the Leontief inverse L = (I - A)⁻¹ to capture the infinite series of supply chain transactions.</p>
+          <p>Households are endogenized via a Social Accounting Matrix (SAM) augmentation to capture induced effects — the consumer spending that ripples through the economy when workers earn income.</p>
+
+          <h3>Flegg Location Quotient</h3>
+          <p>Regional trade patterns are estimated using the Flegg LQ method (Flegg and Webber, 2000), calibrated from county-level BLS employment data. This determines what share of each industry's inputs are sourced locally versus imported.</p>
+
+          <h3>Academic Foundation</h3>
+          <p>Built on the framework described in Miller and Blair (2022), <em>Input-Output Analysis: Foundations and Extensions</em>, 3rd Edition — the standard graduate-level reference for I-O modeling.</p>
+        </div>
+        <div class="method-stats">
+          <div class="stat-box">
+            <div class="number">71</div>
+            <div class="label">Industries modeled</div>
+          </div>
+          <div class="stat-box">
+            <div class="number">3,075</div>
+            <div class="label">U.S. counties</div>
+          </div>
+          <div class="stat-box">
+            <div class="number">0.970</div>
+            <div class="label">BEA correlation</div>
+          </div>
+          <div class="stat-box">
+            <div class="number">2024</div>
+            <div class="label">Data vintage</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USE CASES -->
+  <section class="use-cases">
+    <div class="container">
+      <div class="section-label">Applications</div>
+      <h2 class="section-title">Who Uses SpillOver.io</h2>
+      <p class="section-subtitle">Economic impact analysis for consultants, developers, and public sector agencies.</p>
+
+      <div class="use-case-grid">
+        <div class="use-case">
+          <h3>Economic Development</h3>
+          <p>Quantify the regional impact of new employers, facility expansions, or industry attraction programs for EDO board presentations.</p>
+        </div>
+        <div class="use-case">
+          <h3>Real Estate & Construction</h3>
+          <p>Support entitlements and community benefit agreements with data-driven impact estimates for new developments.</p>
+        </div>
+        <div class="use-case">
+          <h3>Healthcare Systems</h3>
+          <p>Demonstrate the economic footprint of hospitals, medical centers, and healthcare workforce investments.</p>
+        </div>
+        <div class="use-case">
+          <h3>Government & Policy</h3>
+          <p>Analyze tax revenue effects of policy changes, workforce shifts, or public infrastructure investments.</p>
+        </div>
+        <div class="use-case">
+          <h3>Financial Institutions</h3>
+          <p>Quantify the community impact of lending portfolios, branch operations, and community reinvestment activities.</p>
+        </div>
+        <div class="use-case">
+          <h3>Consulting Firms</h3>
+          <p>Produce client-ready reports with professional formatting, full methodology, and Monte Carlo uncertainty analysis.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARISON -->
+  <section class="comparison">
+    <div class="container">
+      <div class="section-label">Comparison</div>
+      <h2 class="section-title">How SpillOver.io Compares</h2>
+      <p class="section-subtitle">Professional-grade results without the enterprise price tag.</p>
+
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th class="highlight">SpillOver.io</th>
+            <th>IMPLAN</th>
+            <th>RIMS II</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Annual cost</td>
+            <td class="highlight"><strong>$149 per analysis</strong></td>
+            <td>$10,000+/year</td>
+            <td>$275 per region</td>
+          </tr>
+          <tr>
+            <td>Free exploration</td>
+            <td class="highlight"><span class="check">✓</span> Full app access</td>
+            <td><span class="cross">✗</span> Paywall</td>
+            <td><span class="cross">✗</span> Paywall</td>
+          </tr>
+          <tr>
+            <td>Monte Carlo CI</td>
+            <td class="highlight"><span class="check">✓</span> Built-in</td>
+            <td><span class="cross">✗</span> Not available</td>
+            <td><span class="cross">✗</span> Not available</td>
+          </tr>
+          <tr>
+            <td>Report generation</td>
+            <td class="highlight"><span class="check">✓</span> Word, PDF, CSV</td>
+            <td><span class="check">✓</span> CSV export</td>
+            <td><span class="cross">✗</span> Tables only</td>
+          </tr>
+          <tr>
+            <td>Methodology</td>
+            <td class="highlight">Leontief + SAM + FLQ</td>
+            <td>Leontief + SAM</td>
+            <td>BEA multipliers</td>
+          </tr>
+          <tr>
+            <td>Data source</td>
+            <td class="highlight">BEA 2024 + BLS QCEW</td>
+            <td>BEA + proprietary</td>
+            <td>BEA</td>
+          </tr>
+          <tr>
+            <td>Training required</td>
+            <td class="highlight">None — web-based</td>
+            <td>Certification recommended</td>
+            <td>Manual calculations</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing">
+    <div class="container">
+      <div class="section-label">Access</div>
+      <h2 class="section-title">Simple, Transparent Pricing</h2>
+      <p class="section-subtitle" style="margin-left:auto; margin-right:auto;">Explore the full platform free. Pay only when you need to download reports.</p>
+
+      <div class="price-card">
+        <h3 style="font-size: 20px; color: var(--navy); font-weight: 700;">Full Platform Access</h3>
+        <div class="price-amount">$149</div>
+        <ul>
+          <li>Unlimited region and scenario modeling</li>
+          <li>Professional Word and PDF report downloads</li>
+          <li>CSV data exports for all tables</li>
+          <li>Monte Carlo uncertainty analysis</li>
+          <li>Full executive summary with pre-written narrative</li>
+          <li>County map and industry specialization data</li>
+          <li>Tax revenue impact estimates</li>
+        </ul>
+        <a href="https://spillover.shinyapps.io/econ_impact_app/" class="btn-primary" style="display: block; text-align: center; margin-top: 24px;">
+          Launch Free Analysis →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+
+      <div style="max-width: 700px; margin-top: 40px;">
+        <div class="faq-item">
+          <h3>What methodology does SpillOver.io use?</h3>
+          <p>SpillOver.io uses a Leontief input-output model constructed from the Bureau of Economic Analysis 2024 Use table (71 industries). The national model is regionalized using Flegg Location Quotients calibrated from BLS Quarterly Census of Employment and Wages data. Households are endogenized via a Social Accounting Matrix for induced effects.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How does this compare to IMPLAN?</h3>
+          <p>SpillOver.io uses the same core Leontief framework as IMPLAN but with different data sources and regionalization. IMPLAN uses proprietary data and SAM accounts; SpillOver.io uses publicly available BEA and BLS data with Flegg LQ regionalization. SpillOver.io also includes Monte Carlo uncertainty analysis, which IMPLAN does not offer.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What regions are available?</h3>
+          <p>Any U.S. county (3,075 counties across 49 states) or metropolitan statistical area (80+ pre-defined MSAs). You can also build custom multi-county regions by selecting individual counties.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Is the platform free to use?</h3>
+          <p>Yes — you can explore the full platform, build regional models, run scenarios, and view results without creating an account or paying anything. Payment ($149) is only required to download Word, PDF, and CSV report files.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What's included in the downloadable report?</h3>
+          <p>Professional Word and PDF documents containing: executive summary with pre-written narrative, county map, regional economic profile, scenario description, full methodology section, impact results tables with narrative interpretation, tax revenue estimates, top 20 industries table, and Monte Carlo analysis (if run). Reports are formatted for client presentations and board meetings.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Can I model negative economic scenarios?</h3>
+          <p>Yes. SpillOver.io supports both positive scenarios (new investments, expansions) and negative scenarios (plant closures, remote work displacement, industry contraction). Negative scenarios show job losses, reduced output, and diminished tax revenue with appropriate narrative language throughout the report.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="padding: 80px 24px; text-align: center; background: linear-gradient(135deg, var(--navy), var(--blue));">
+    <h2 style="font-family: 'DM Serif Display', serif; font-size: clamp(28px, 4vw, 40px); color: white; margin-bottom: 16px;">
+      Ready to Run Your Analysis?
+    </h2>
+    <p style="color: rgba(255,255,255,0.8); font-size: 18px; margin-bottom: 32px; font-weight: 300;">
+      Free to explore. No account required. Results in minutes.
+    </p>
+    <a href="https://spillover.shinyapps.io/econ_impact_app/" class="btn-primary" style="font-size: 18px; padding: 18px 48px;">
+      Launch SpillOver.io →
+    </a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="logo" style="display:flex; align-items:center; justify-content:center; gap:10px;">
+      <svg viewBox="0 0 32 36" fill="none" xmlns="http://www.w3.org/2000/svg" style="height:24px;">
+        <polyline points="0,28 8,18 16,22 28,8" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <polyline points="20,8 28,8 28,16" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="0" y1="32" x2="28" y2="32" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      SpillOver<span>.io</span>
+    </div>
+    <p>Regional Economic Impact Analysis Platform</p>
+    <div class="footer-links">
+      <a href="https://spillover.shinyapps.io/econ_impact_app/">Launch Platform</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#faq">FAQ</a>
+      <a href="mailto:info@spillover.io">Contact</a>
+    </div>
+    <p style="margin-top: 24px; font-size: 12px; opacity: 0.6;">
+      © 2026 SpillOver.io. Built on Bureau of Economic Analysis and Bureau of Labor Statistics public data.<br>
+      Methodology: Leontief I-O with SAM extension and Flegg LQ regionalization (Miller & Blair, 2022).
+    </p>
+  </footer>
+
+</body>
+</html>
