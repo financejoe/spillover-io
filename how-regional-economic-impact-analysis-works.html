@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Regional Economic Impact Analysis Actually Works: A Step-by-Step Guide | SpillOver.io</title>
+  <meta name="description" content="A complete walkthrough of Leontief input-output methodology for regional economic impact analysis — from BEA data to multipliers, employment estimates, and professional reports.">
+  <meta name="keywords" content="economic impact analysis, input-output model, Leontief model, regional economics, multiplier analysis, BEA data, fiscal impact, job creation analysis, economic development, economic impact methodology">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="How Regional Economic Impact Analysis Actually Works: A Step-by-Step Guide">
+  <meta property="og:description" content="A complete walkthrough of Leontief I-O methodology — from BEA data to regional multipliers and impact reports.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://spillover.io/blog/how-regional-economic-impact-analysis-works.html">
+  <meta property="og:image" content="https://spillover.io/og-image.png">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How Regional Economic Impact Analysis Actually Works: A Step-by-Step Guide">
+  <meta name="twitter:description" content="How Leontief I-O models work, step by step. From BEA data to regional impact reports.">
+  
+  <!-- Canonical -->
+  <link rel="canonical" href="https://spillover.io/blog/how-regional-economic-impact-analysis-works.html">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "How Regional Economic Impact Analysis Actually Works: A Step-by-Step Guide",
+    "description": "A practical guide to performing rigorous regional economic impact analysis using Leontief input-output methodology and Bureau of Economic Analysis data.",
+    "author": {
+      "@type": "Organization",
+      "name": "SpillOver.io"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "SpillOver.io",
+      "url": "https://spillover.io"
+    },
+    "datePublished": "2026-03-17",
+    "dateModified": "2026-03-17",
+    "mainEntityOfPage": "https://spillover.io/blog/how-regional-economic-impact-analysis-works.html",
+    "keywords": ["economic impact analysis", "Leontief model", "input-output analysis", "BEA data", "regional multipliers", "economic impact methodology"]
+  }
+  </script>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy: #1B3A5C;
+      --blue: #2E75B6;
+      --light-blue: #E8F0F8;
+      --green: #16a34a;
+      --dark-green: #15803d;
+      --slate: #475569;
+      --light-slate: #94a3b8;
+      --off-white: #f8fafc;
+      --warm-white: #fefefe;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      color: #1a1a2e;
+      background: var(--warm-white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      padding: 16px 0;
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 24px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo svg { height: 28px; width: auto; }
+    .nav-logo-text {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 22px; font-weight: 700; color: var(--navy);
+    }
+    .nav-logo-text span { color: var(--blue); font-weight: 400; }
+    .nav-cta {
+      background: var(--navy); color: white; padding: 10px 24px;
+      border-radius: 8px; text-decoration: none; font-weight: 600;
+      font-size: 14px; transition: all 0.2s;
+    }
+    .nav-cta:hover { background: var(--blue); transform: translateY(-1px); }
+
+    .article-header {
+      padding: 140px 24px 60px;
+      background: linear-gradient(175deg, var(--off-white) 0%, white 40%, var(--light-blue) 100%);
+      text-align: center;
+    }
+    .article-header .breadcrumb {
+      font-size: 13px; color: var(--light-slate); margin-bottom: 20px;
+    }
+    .article-header .breadcrumb a { color: var(--blue); text-decoration: none; }
+    .article-header .breadcrumb a:hover { text-decoration: underline; }
+    .article-header h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(32px, 5vw, 52px);
+      color: var(--navy); line-height: 1.15;
+      max-width: 800px; margin: 0 auto 20px;
+    }
+    .article-header .subtitle {
+      font-size: 18px; color: var(--slate); max-width: 620px;
+      margin: 0 auto; line-height: 1.6; font-weight: 300;
+    }
+    .article-meta {
+      margin-top: 24px; font-size: 13px; color: var(--light-slate);
+    }
+
+    article {
+      max-width: 720px; margin: 0 auto; padding: 60px 24px 100px;
+    }
+    article h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 28px; color: var(--navy); margin: 48px 0 16px;
+      line-height: 1.2;
+    }
+    article h3 {
+      font-size: 20px; font-weight: 700; color: var(--navy);
+      margin: 36px 0 12px;
+    }
+    article p {
+      font-size: 16px; line-height: 1.8; color: var(--slate);
+      margin-bottom: 20px; font-weight: 300;
+    }
+    article strong { color: var(--navy); font-weight: 600; }
+    article a { color: var(--blue); text-decoration: none; }
+    article a:hover { text-decoration: underline; }
+
+    article ul, article ol {
+      margin: 0 0 20px 24px; color: var(--slate);
+      font-size: 16px; line-height: 1.8; font-weight: 300;
+    }
+    article li { margin-bottom: 8px; }
+
+    .callout {
+      background: var(--light-blue); border-left: 4px solid var(--blue);
+      padding: 20px 24px; border-radius: 0 8px 8px 0;
+      margin: 32px 0; font-size: 15px; line-height: 1.7; color: var(--navy);
+    }
+    .callout strong { font-weight: 700; }
+
+    .data-table {
+      width: 100%; border-collapse: collapse; margin: 24px 0;
+      background: white; border-radius: 12px; overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .data-table th {
+      background: var(--navy); color: white; padding: 12px 16px;
+      text-align: left; font-weight: 600; font-size: 13px;
+    }
+    .data-table td {
+      padding: 12px 16px; border-bottom: 1px solid #f1f5f9;
+      font-size: 14px; color: var(--slate);
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      border-radius: 16px; padding: 40px; text-align: center;
+      margin: 48px 0;
+    }
+    .cta-box h3 {
+      color: white; font-family: 'DM Serif Display', serif;
+      font-size: 24px; margin-bottom: 12px;
+    }
+    .cta-box p { color: rgba(255,255,255,0.8); font-size: 15px; margin-bottom: 20px; }
+    .cta-box .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--green), var(--dark-green));
+      color: white; padding: 14px 32px; border-radius: 10px;
+      text-decoration: none; font-weight: 600; font-size: 16px;
+      transition: all 0.25s; box-shadow: 0 4px 16px rgba(22,163,74,0.25);
+    }
+    .cta-box .btn:hover { transform: translateY(-2px); }
+
+    .step-box {
+      background: white; border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 12px; padding: 24px; margin: 20px 0;
+    }
+    .step-box h4 {
+      font-size: 16px; font-weight: 700; color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .step-box p { margin-bottom: 0; font-size: 15px; }
+
+    footer {
+      background: var(--navy); color: rgba(255,255,255,0.7);
+      padding: 60px 24px; text-align: center;
+    }
+    footer .logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 28px; color: white; margin-bottom: 12px;
+    }
+    footer .logo span { color: var(--blue); }
+    footer p { font-size: 14px; line-height: 1.8; }
+    footer a { color: var(--blue); text-decoration: none; }
+    footer a:hover { color: white; }
+    .footer-links { margin: 20px 0; }
+    .footer-links a { margin: 0 16px; }
+
+    @media (max-width: 768px) {
+      .article-header { padding: 120px 24px 40px; }
+      article { padding: 40px 16px 80px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <svg viewBox="0 0 32 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polyline points="0,28 8,18 16,22 28,8" stroke="#1B3A5C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <polyline points="20,8 28,8 28,16" stroke="#1B3A5C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="0" y1="32" x2="28" y2="32" stroke="#1B3A5C" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <div class="nav-logo-text">SpillOver<span>.io</span></div>
+      </a>
+      <a href="https://spillover.shinyapps.io/econ_impact_app/" class="nav-cta">Launch Platform →</a>
+    </div>
+  </nav>
+
+  <div class="article-header">
+    <div class="breadcrumb"><a href="/">SpillOver.io</a> / <a href="/blog/">Blog</a></div>
+    <h1>How Regional Economic Impact Analysis Actually Works: A Step-by-Step Guide</h1>
+    <p class="subtitle">A complete walkthrough of the Leontief input-output methodology that powers regional economic impact studies — what the model does, what data it uses, and how to interpret the results.</p>
+    <p class="article-meta">Published March 17, 2026 · 12 min read</p>
+  </div>
+
+  <article>
+
+    <p>Economic impact analysis is one of the most commonly requested deliverables in economic development, public policy, and real estate. Whether you're evaluating a proposed hospital, justifying a tax incentive, or measuring the regional footprint of a university, the question is always the same: <strong>how many jobs, how much output, and how much tax revenue does this activity generate for the region?</strong></p>
+
+    <p>The methodology behind these analyses is well-established. It's based on a framework developed by Nobel laureate Wassily Leontief in the 1930s and refined over decades of academic research. The data comes from the Bureau of Economic Analysis and the Bureau of Labor Statistics — both free, both updated annually, both covering every county in the United States.</p>
+
+    <p>This article walks through exactly how regional economic impact analysis works, what data you need, and how to go from raw public data to a professional impact estimate.</p>
+
+    <h2>What Economic Impact Analysis Actually Measures</h2>
+
+    <p>When a new employer enters a region — say a hospital system expanding operations by $50 million — that spending doesn't stop at the hospital's front door. The hospital purchases medical supplies from distributors, contracts janitorial and food services, pays utility bills, and hires professional services like legal and accounting firms. Each of those businesses in turn purchases from their own suppliers. And every worker across this chain earns wages they spend on housing, groceries, and entertainment in the local economy.</p>
+
+    <p>Economic impact analysis traces these cascading transactions and quantifies the total effect. The framework identifies three distinct channels:</p>
+
+    <div class="step-box">
+      <h4>Direct Effects</h4>
+      <p>The initial change in economic activity. If the hospital expands by $50 million, that's the direct effect — the first dollar spent.</p>
+    </div>
+
+    <div class="step-box">
+      <h4>Indirect Effects</h4>
+      <p>The business-to-business supply chain response. Every round of purchasing from local suppliers generates additional economic activity. The hospital buys from a medical supply company, which buys from a logistics firm, which buys fuel and vehicle maintenance locally. This chain of inter-industry transactions is the indirect effect.</p>
+    </div>
+
+    <div class="step-box">
+      <h4>Induced Effects</h4>
+      <p>The consumer spending response. Workers at the hospital and across its supply chain earn income, which they spend in the local economy — on rent, restaurants, retail, and services. This household consumption channel generates a further round of economic activity.</p>
+    </div>
+
+    <p>The sum of all three gives you the <strong>total economic impact</strong>. The ratio of total to direct is the <strong>output multiplier</strong> — the single most important number in any impact analysis. A multiplier of 1.48 means every dollar of direct spending generates $1.48 in total regional economic activity.</p>
+
+    <h2>The Data You Need</h2>
+
+    <p>The entire analytical framework runs on four datasets, all published by federal statistical agencies and available at no cost:</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Dataset</th>
+          <th>Source</th>
+          <th>Role in the Model</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>National Use Table</td>
+          <td><a href="https://www.bea.gov/industry/input-output-accounts-data">BEA Input-Output Accounts</a></td>
+          <td>Shows how every industry purchases from every other industry — the backbone of the model</td>
+        </tr>
+        <tr>
+          <td>County-Level Employment</td>
+          <td><a href="https://www.bls.gov/cew/">BLS QCEW</a></td>
+          <td>Employment by industry for every U.S. county — used to regionalize the national model</td>
+        </tr>
+        <tr>
+          <td>National Industry Output</td>
+          <td>BEA GDP-by-Industry</td>
+          <td>Total output by industry at the national level — used as denominators for Location Quotients</td>
+        </tr>
+        <tr>
+          <td>Compensation &amp; Value Added</td>
+          <td>BEA Use Table (value added rows)</td>
+          <td>Employee compensation and value added ratios — needed for employment and income multipliers</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>The BEA publishes its input-output tables at the summary level (71 industries), which captures the economic structure that drives multiplier calculations. The BLS Quarterly Census of Employment and Wages provides establishment-level employment counts aggregated to the county level by 6-digit NAICS code. Together, these datasets contain everything needed to build a complete regional input-output model for any county or combination of counties in the country.</p>
+
+    <h2>Building the Model: Five Steps</h2>
+
+    <h3>Step 1: Construct the Direct Requirements Matrix</h3>
+
+    <p>The BEA Use table shows, for each industry, exactly how much it purchases from every other industry. Download the table and normalize each column by the industry's total output. The result is the <strong>direct requirements matrix A</strong> — a 71×71 matrix where each cell represents the cents of input required from industry <em>i</em> to produce one dollar of output in industry <em>j</em>.</p>
+
+    <p>For example, if the healthcare industry requires $0.03 of real estate services for every dollar of output, the cell (real estate, healthcare) equals 0.03.</p>
+
+    <h3>Step 2: Compute the Leontief Inverse</h3>
+
+    <p>The Leontief inverse is the mathematical core of the model. It's computed as <strong>L = (I − A)⁻¹</strong>, where I is the identity matrix and A is the direct requirements matrix from Step 1.</p>
+
+    <p>This single matrix inversion captures the infinite series of supply chain transactions — not just the first round of purchasing, but the second, third, and hundredth round. Each element L(i,j) tells you the total output required from industry <em>i</em> to deliver one dollar of final demand to industry <em>j</em>, after all rounds of inter-industry transactions have played out.</p>
+
+    <p>Column sums of the Leontief inverse give you the <strong>Type I output multipliers</strong> — the direct plus indirect effects. These should closely match the multipliers BEA publishes in its Total Requirements table, which provides a useful validation check. (Our implementation achieves a 0.970 Pearson correlation with BEA's published table.)</p>
+
+    <h3>Step 3: Endogenize Households</h3>
+
+    <p>The basic Leontief inverse captures only indirect effects — supply chain purchasing. To include induced effects — consumer spending by workers — you need to bring households into the model as if they were an industry.</p>
+
+    <p>This is done through a <strong>Social Accounting Matrix (SAM) extension</strong>. Add a household column to the direct requirements matrix representing consumer spending patterns across industries (from BEA Personal Consumption Expenditure data). Add a household row representing labor income earned from each industry (from the compensation of employees row in the Use table). Then re-compute the Leontief inverse on the expanded matrix.</p>
+
+    <p>A <strong>consumer propensity parameter</strong> (typically 0.60–0.80) controls what fraction of earned income is respent locally. This is one of the most influential parameters in the model, which is why sensitivity analysis matters — more on that below.</p>
+
+    <p>The result is the <strong>Type II (SAM) multiplier</strong>, which includes direct, indirect, and induced effects.</p>
+
+    <h3>Step 4: Regionalize</h3>
+
+    <p>The national model assumes every industry can source 100% of its inputs locally. In reality, a small county imports most of its steel, chemicals, and specialized manufacturing inputs from outside the region. <strong>Regionalization</strong> adjusts the national coefficients to reflect which industries are actually present locally and at what scale.</p>
+
+    <p>The most widely published academic method is the <strong>Flegg Location Quotient (FLQ)</strong>, described in Flegg and Webber (2000). It computes a cross-industry Location Quotient for each pair of industries based on relative employment size from BLS QCEW data, then adjusts the direct requirements matrix accordingly. Industries that are underrepresented locally have their input coefficients reduced — that spending "leaks" to imports instead of circulating locally.</p>
+
+    <p>The FLQ method has a key parameter <strong>δ (delta)</strong>, typically calibrated between 0.20 and 0.30, that controls the overall propensity to import. Higher delta means more leakage. Smaller, more specialized regions naturally have higher import leakage and lower multipliers than large, diversified metros.</p>
+
+    <p>A useful diagnostic: compute the region's <strong>Flegg lambda (λ)</strong>, which measures overall regional size relative to the national economy. Lambda values below 0.10 indicate a small, import-dependent region; values above 0.30 indicate a large, relatively self-sufficient metro.</p>
+
+    <h3>Step 5: Apply Shocks and Interpret Results</h3>
+
+    <p>With the regionalized SAM-augmented Leontief inverse in hand, multiply it by a vector of economic shocks — direct spending changes by industry — to get total impacts. Decompose the results into direct, indirect, and induced components. Convert output impacts to employment, value added, labor income, and tax revenue using industry-specific ratios from the BEA data.</p>
+
+    <p>The output is a complete impact profile: total output generated (or lost), jobs supported (or eliminated), contribution to regional GDP, labor income across all affected industries, and estimated tax revenue at federal and state/local levels.</p>
+
+    <div class="callout">
+      <strong>Key takeaway:</strong> The entire methodology is five steps of matrix algebra applied to publicly available data. The math is in any graduate-level regional economics textbook — Miller and Blair's <em>Input-Output Analysis: Foundations and Extensions</em> (2022, 3rd Edition) is the standard reference.
+    </div>
+
+    <h2>Why Uncertainty Quantification Matters</h2>
+
+    <p>One of the biggest shortcomings in practice is that most economic impact analyses present results as precise point estimates. A report might state "the project will create 317 jobs" — but this single number conceals substantial uncertainty in the underlying model parameters.</p>
+
+    <p>The Flegg delta parameter, consumer propensity, commuter retention factor, and the shock amounts themselves are all estimates with plausible ranges. Small changes in these parameters can shift results by 10–20%. Presenting a single number without context misleads decision-makers about the precision of the analysis.</p>
+
+    <p>The solution is <strong>Monte Carlo simulation</strong> — running the model thousands of times, each with a different randomly sampled set of parameter values drawn from their plausible ranges. The result is a distribution of outcomes, from which you can report a median estimate with confidence intervals.</p>
+
+    <div class="callout">
+      <strong>Example:</strong> Instead of "the hospital expansion will create 317 jobs," a Monte Carlo analysis reports "the hospital expansion will create an estimated 317 jobs (90% CI: 284–351)." The confidence interval communicates both the estimate and its precision — which is what a decision-maker actually needs.
+    </div>
+
+    <p>Surprisingly, most commercial impact analysis tools do not include uncertainty quantification. This represents a significant gap in professional practice, and it's one of the reasons we built Monte Carlo simulation directly into <a href="https://spillover.shinyapps.io/econ_impact_app/">SpillOver.io</a>.</p>
+
+    <h2>Practical Applications</h2>
+
+    <p>The methodology described above applies to a wide range of scenarios across economic development, public policy, and private investment:</p>
+
+    <ul>
+      <li><strong>New facility analysis</strong> — quantify the total regional impact of a proposed hospital, manufacturing plant, data center, or mixed-use development</li>
+      <li><strong>Industry attraction</strong> — estimate the multiplier effects of recruiting a specific employer to your region, including supply chain and consumer spending impacts</li>
+      <li><strong>Loss scenarios</strong> — measure the economic damage from a plant closure, military base realignment, or shift to remote work (the model handles negative shocks with appropriate narrative)</li>
+      <li><strong>Tax incentive justification</strong> — compare the cost of a proposed incentive against the projected tax revenue impact to determine whether the investment pays for itself</li>
+      <li><strong>Community reinvestment</strong> — demonstrate the local economic footprint of a financial institution's lending portfolio or community investment activities</li>
+      <li><strong>University impact</strong> — quantify the total economic contribution of a college or university, including operational spending, student spending, and research expenditures</li>
+    </ul>
+
+    <p>In each case, the core methodology is the same: define the direct economic activity by industry, apply the regionalized Leontief model, and decompose the results into output, employment, value added, and tax revenue.</p>
+
+    <h2>Choosing Your Approach</h2>
+
+    <p>You have three practical paths to producing a regional economic impact analysis:</p>
+
+    <h3>1. Build Your Own Model</h3>
+
+    <p>If you have quantitative skills in R, Python, or even Excel with matrix functions, you can build a complete I-O model from the BEA and BLS data described above. This gives you full transparency and control. The downside is the upfront development time — expect several weeks to build, validate, and document a model from scratch, plus ongoing maintenance as data vintages are updated.</p>
+
+    <h3>2. Purchase BEA Multipliers (RIMS II)</h3>
+
+    <p>The Bureau of Economic Analysis sells pre-computed regional multipliers through its RIMS II program at $275 per region. These are straightforward to apply — multiply your direct impact by the published multiplier — but you get static tables, not an interactive model. There's no way to run custom scenarios, test sensitivity to parameters, or generate narrative reports. RIMS II is best for quick back-of-envelope estimates.</p>
+
+    <h3>3. Use a Web-Based Platform</h3>
+
+    <p><a href="https://spillover.shinyapps.io/econ_impact_app/">SpillOver.io</a> implements the full methodology described in this article as a free-to-explore web application. Select any U.S. county or metropolitan area, define your scenario using built-in templates or custom industry shocks, and view complete results in seconds — including multipliers, employment, value added, tax revenue, and top industries affected. Monte Carlo uncertainty analysis is built in. Professional Word and PDF reports with full methodology narrative are available for download.</p>
+
+    <p>The platform uses Bureau of Economic Analysis 2024 data at the 71-industry summary level, regionalized using Flegg Location Quotients from BLS QCEW county employment, with a Social Accounting Matrix extension for induced effects.</p>
+
+    <h2>Getting Started</h2>
+
+    <p>If you want to try running an economic impact analysis right now, <a href="https://spillover.shinyapps.io/econ_impact_app/">launch SpillOver.io</a>. It's free to explore, no account required. Select a region, pick a scenario, and see your results in under five minutes.</p>
+
+    <p>If you want to build your own model from scratch, start with Miller and Blair (2022) and the BEA's published Use tables. The math is accessible to anyone with comfort in linear algebra, and every dataset is a free download.</p>
+
+    <p>Either way, the barrier to rigorous economic impact analysis is not software or data — both are accessible. The barrier is understanding the methodology well enough to apply it correctly and interpret the results responsibly. This article is a starting point. The references below will take you deeper.</p>
+
+    <div class="cta-box">
+      <h3>Try SpillOver.io Free</h3>
+      <p>Run a complete economic impact analysis for any U.S. county or metro area. No account required.</p>
+      <a href="https://spillover.shinyapps.io/econ_impact_app/" class="btn">Launch Free Analysis →</a>
+    </div>
+
+    <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 48px 0;">
+
+    <p style="font-size: 14px; color: var(--light-slate); line-height: 1.7;">
+      <strong style="color: var(--slate);">References:</strong><br>
+      Bureau of Economic Analysis (2024). Input-Output Accounts Data. U.S. Department of Commerce.<br>
+      Bureau of Labor Statistics (2024). Quarterly Census of Employment and Wages.<br>
+      Flegg, A.T. and Webber, C.D. (2000). Regional size, regional specialization and the FLQ formula. <em>Regional Studies</em>, 34(6), 563–569.<br>
+      Miller, R.E. and Blair, P.D. (2022). <em>Input-Output Analysis: Foundations and Extensions</em>, 3rd Edition. Cambridge University Press.
+    </p>
+
+  </article>
+
+  <footer>
+    <div class="logo" style="display:flex; align-items:center; justify-content:center; gap:10px;">
+      <svg viewBox="0 0 32 36" fill="none" xmlns="http://www.w3.org/2000/svg" style="height:24px;">
+        <polyline points="0,28 8,18 16,22 28,8" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <polyline points="20,8 28,8 28,16" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="0" y1="32" x2="28" y2="32" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      SpillOver<span>.io</span>
+    </div>
+    <p>Regional Economic Impact Analysis Platform</p>
+    <div class="footer-links">
+      <a href="https://spillover.shinyapps.io/econ_impact_app/">Launch Platform</a>
+      <a href="/">Home</a>
+      <a href="mailto:info@spillover.io">Contact</a>
+    </div>
+    <p style="margin-top: 24px; font-size: 12px; opacity: 0.6;">
+      © 2026 SpillOver.io. Built on Bureau of Economic Analysis and Bureau of Labor Statistics public data.
+    </p>
+  </footer>
+
+</body>
+</html>
